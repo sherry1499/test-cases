@@ -5,9 +5,10 @@ description: >-
   the user asks to write, add, move, or correct 测试用例, 用例, REQ cases, or
   云文档用例 for WDS, 总包, 售后, or 平台智库. Follow the fixed order: requirement
   link, reusable cases, UI design, technical doc and code, historical defects.
-  Cover page elements, buttons, query, pagination, record count, sort, boundary
-  values, data types, browser, APP version, tablet, weak network, interruption,
-  and permission isolation. Compose each case title from the key points of
+  Cover page elements, query, list items, buttons, data refresh, duplicate
+  prevention, how query affects pagination, sort, page interaction, boundary
+  values, data types, browser, APP version, tablet, weak network, errors,
+  interruption, and permission isolation. Compose each case title from the key points of
   its test data, preconditions, steps, and expected results. Prefer 30
   characters or fewer with all four. Allow four up to 40 characters. Over 40,
   keep three, usually preconditions, steps, and expected results.
@@ -50,18 +51,25 @@ description: >-
 
 功能写完后，按页面把下面这些补上。放在对应功能旁边，不要无关联地堆到整表最后。只有用户说「放在最后面」才追加。
 
-- 元素和展示：标题、字段、空值、标签、提示文案是否按设计和需求出现。
-- 操作按钮和取消按钮：每个状态下有哪些按钮；取消、关闭、点遮罩不改变数据，确认才生效。
-- 查询：能搜哪些字段，搜不到时是什么结果，查询后是否回到第一页。
-- 分页：超过一页怎么翻，翻页不重复、不遗漏，改每页条数后的条数。
+- 页面元素展示：标题、字段、空值、标签、提示文案是否按设计和需求出现。
+- 查询功能：能搜哪些字段，输入什么能搜到，搜不到时是什么结果。
+- 列表项：每一行展示哪些字段，空列表怎么显示，点进详情的数据和这一行一致。
+- 操作按钮：每个状态下有哪些按钮；取消、关闭、点遮罩不改变数据，确认才生效。
+- 数据更新：新增、修改、删除或状态变化后，列表和详情变成新数据，不残留旧数据。
+- 防重复校验：连续点击提交、重复提交同一条、唯一字段重复时，不能生成两条记录。
+- 查询和分页的影响：查询或筛选后回到第一页，总条数按新结果重算；翻页后再改条件，不停留在旧结果的页码上。
+- 分页：超过一页怎么翻，翻页不重复、不遗漏，改每页条数后当前页按新条数展示。
 - 记录条数：总条数和当前页条数一致。
-- 排序：默认顺序是什么；表头不能点时，点击后顺序不变。
-- 边界值和数据类型：必填、长度、格式、枚举、空值、重复值、超限值。以需求和代码里的限制为准，不另造一套上下限。
+- 数据排序：默认顺序是什么；表头不能点时，点击后顺序不变。
+- 页面交互：切换 Tab、打开和关闭弹窗、返回、展开收起时，未确认的内容不生效，已确认的不丢失。
+- 边界值：必填、长度、空值、刚好达到上限、超过上限。以需求和代码里的限制为准，不另造一套上下限。
+- 数据类型：格式、枚举、数字、日期、文本按字段类型校验，非法类型不能提交。
 - 浏览器兼容：每种页面只写两条，一条雇主、一条供应商（或该页实际的两端）。浏览器写在测试数据：谷歌浏览器、Safari、360 安全浏览器极速模式、Microsoft Edge。
 - 页面缩放：另写，用谷歌浏览器测 80%、100%、150%。其他浏览器不重复测缩放。
 - APP 新旧版兼容：需求包含 APP 时才写。同一条主路径在当前版和上一版各走一遍，看入口、数据和提交结果。需求没有 APP 时不编 APP 页面。
 - 平板兼容：需求包含平板时，用平板分辨率看主要页面的展示和按钮是否可点。
 - 弱网：提交、上传、列表加载时网络慢或失败，看提示、能否重试，不能生成半截数据。
+- 异常：接口失败、保存失败、返回空或非法数据时有明确提示，已有数据不被改坏，可以重试。
 - 中断：提交或上传过程中离开、刷新、关闭页面。未确认的操作不生效；已成功的不重复提交。
 - 权限隔离：无权限账号看不到入口和数据；别人的单搜不到、打不开。
 
